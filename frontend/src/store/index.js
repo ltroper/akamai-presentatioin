@@ -1,8 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import bank from "./bank"
 
 
 const rootReducer = combineReducers({
+    bank
 });
 
 
