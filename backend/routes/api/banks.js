@@ -13,9 +13,8 @@ const url = "https://gee.bccr.fi.cr/IndicadoresEconomicos/Cuadros/frmConsultaTCV
 
 
 router.post("/", (async (req, res) => {
-    console.log(req)
     const bank = req.body
-    // console.log(bank)
+    // console.log(req, bank, "HERE")
     let banksArr = []
 
     axios(url).then(response => {
@@ -23,6 +22,7 @@ router.post("/", (async (req, res) => {
         const $ = cheerio.load(html)
 
         const banks = $('#DG > tbody > tr').text()
+        console.log(banks)
             let listOfBanks = banks.split("\n")
             listOfBanks.forEach(ele => {
                 let str = ele.replace(/\s/g, '')
