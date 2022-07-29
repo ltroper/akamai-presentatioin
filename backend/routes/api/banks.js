@@ -12,28 +12,45 @@ const url = "https://gee.bccr.fi.cr/IndicadoresEconomicos/Cuadros/frmConsultaTCV
 
 
 
-router.post("/", asyncHandler (async (req, res) => {
+router.post("/", (async (req, res) => {
+    console.log(req)
     const bank = req.body
+    // console.log(bank)
     let banksArr = []
 
-    request(url, (err, res, html) => {
-        if (!err && res.statusCode == 200){
-            const $ = cheerio.load(html)
-            // const table = $("#DG")
-            // const thisBank = table.find(bank).text()
+    axios(url).then(response => {
+        const html = response.data
+        const $ = cheerio.load(html)
 
-            const banks = $('#DG > tbody > tr').text()
+        const banks = $('#DG > tbody > tr').text()
             let listOfBanks = banks.split("\n")
             listOfBanks.forEach(ele => {
-                banksArr.push([ele])
+                let str = ele.replace(/\s/g, '')
+                banksArr.push([str])
             })
-            // banksArr.push(banks.split("\n"))
-            console.log(banksArr)
-            // console.log(table.text())
-            // console.log(thisBank)
-        }
+
+        let resArray = banksArr.filter(arr => arr[0].length > 0)
+        resArray.shift()
+        return res.json(resArray)
+
     })
-    return res.json(banksArr)
+    // const response = request(url, (err, res, html) => {
+    //     if (!err && res.statusCode == 200){
+    //         const $ = cheerio.load(html)
+
+
+    //         const banks = $('#DG > tbody > tr').text()
+    //         let listOfBanks = banks.split("\n")
+    //         listOfBanks.forEach(ele => {
+    //             banksArr.push([ele])
+    //         })
+    //     }
+    //     return banksArr
+    // })
+    // console.log(response)
+    // return res1.json(response)
+
+
 }))
 
 

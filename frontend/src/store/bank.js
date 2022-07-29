@@ -1,6 +1,3 @@
-const cors = require("cors")({origin: true})
-
-
 const GET_BANK = "bank/get"
 
 
@@ -12,11 +9,13 @@ const getBank = bank => {
 }
 
 export const getBankThunk = bank => async dispatch => {
-    
+
+
     const res = await fetch("/api/banks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bank),
+        // body: "this is the body"
     });
 
     const data = await res.json();

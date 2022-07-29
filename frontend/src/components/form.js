@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getBankThunk } from '../store/bank';
 
 
+import "./form.css"
+
 const Form = () => {
 
     const dispatch = useDispatch()
@@ -15,12 +17,12 @@ const Form = () => {
     const toggleBank = e => {
         e.preventDefault();
         setBank(e.target.value)
-        dispatch(getBankThunk(bank))
+        dispatch(getBankThunk(e.target.value))
     }
 
     return (
-        <div>
-            <h1>Search for a Bank</h1>
+        <div className='body'>
+            <h1 className='title'>Seleccione su Banco</h1>
             <div>
                 <form >
                     <select
