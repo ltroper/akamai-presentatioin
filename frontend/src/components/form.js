@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { getBankThunk } from '../store/bank';
 
@@ -12,12 +12,56 @@ const Form = () => {
 
     const [bank, setBank] = useState('');
 
+    const bankWithoutSpaces = bank.replace(/\s/g, '')
 
+    const allBanks = useSelector(state => state?.bank["[object Object]"]?.bank);
+    let thisBank = allBanks?.filter(ele => ele[0].includes(bankWithoutSpaces))[0][0].toLowerCase()
+
+    let amPm = thisBank?.substr(thisBank.length - 4);
+    console.log(thisBank)
+    if (thisBank?.includes("cooperativascoope-anden°1r.l.")) {
+        thisBank = thisBank?.replace(/\D/g,'');
+        thisBank = thisBank.substring(1);
+    }
+    console.log(thisBank)
+
+    thisBank = thisBank?.replace(/\D/g,'');
+
+
+    let buyPrice = (thisBank?.slice(0, 5)/100).toFixed(2)
+    let sellPrice = (thisBank?.slice(5, 10)/100).toFixed(2)
+    let differential = (thisBank?.slice(10, 14)/100).toFixed(2)
+
+    let day = thisBank?.slice(14, 16)
+    let month = thisBank?.slice(16, 18)
+    let year = thisBank?.slice(18, 22)
+
+    let hour = thisBank?.slice(22, 24)
+    let minute = thisBank?.slice(24, 26)
+
+
+    // let abc = [
+    //     "a", "b", "c", "d", "e", "f",
+    //     "g", "h", "i", "j", "k", "l",
+    //     "m", "n", "o", "p", "q", "r",
+    //     "s", "t", "u", "v", "w", "x",
+    //     "y", "z"
+    // ]
+    // while(abc.includes(thisBank[0])){
+    //     thisBank.shift()
+    // }
+    // console.log(buyPrice, sellPrice, differential)
+    // console.log(day, month, year)
+    // console.log(hour, minute, amPm)
+
+
+    useEffect(() => {
+        dispatch(getBankThunk(bank));
+    }, [dispatch, bank]);
 
     const toggleBank = e => {
         e.preventDefault();
         setBank(e.target.value)
-        dispatch(getBankThunk(e.target.value))
     }
 
     return (
@@ -70,7 +114,12 @@ const Form = () => {
             </div>
             <div>
                 {bank.length > 0 && (
-                    <h1>{bank}</h1>
+                    <div>
+                        <h3>Compra ₡{buyPrice}</h3>
+                        <h3>Venta ₡{sellPrice}</h3>
+                        <h3>Diferencial Cambiario: ₡{differential}</h3>
+                        <h3>Última Actualización: {day}/{month}/{year} {hour}:{minute}{amPm}</h3>
+                    </div>
                 )}
             </div>
         </div>
