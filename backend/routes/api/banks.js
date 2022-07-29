@@ -23,7 +23,11 @@ router.post("/", asyncHandler (async (req, res) => {
             // const thisBank = table.find(bank).text()
 
             const banks = $('#DG > tbody > tr').text()
-            banksArr.push(banks)
+            let listOfBanks = banks.split("\n")
+            listOfBanks.forEach(ele => {
+                banksArr.push([ele])
+            })
+            // banksArr.push(banks.split("\n"))
             console.log(banksArr)
             // console.log(table.text())
             // console.log(thisBank)
