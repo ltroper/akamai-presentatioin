@@ -30,7 +30,6 @@ const bankReducer = (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
         case GET_BANK:
-            console.log(action)
             newState[action] = action
             return newState;
 
