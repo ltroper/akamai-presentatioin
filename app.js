@@ -15,7 +15,16 @@ app.use(
     })
 );
 
+
+
 app.use(bodyParser.json());
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("frontend/build"));
+    app.get("/", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+    });
+  }
 
 app.use((_req, _res, next) => {
     const err = new Error("The requested resource couldn't be found.");
