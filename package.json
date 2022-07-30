@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon --prefix backend app.js",
-    "start": "node --prefix backend app.js",
+    "server": "cd backend && nodemon app.js",
+    "start": "cd backend && node app.js",
     "frontend": "npm start --prefix frontend",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
