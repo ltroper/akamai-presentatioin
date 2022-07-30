@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "backend": "npm start --prefix backend",
-    "frontend": "npm start --prefix frontend",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "concurrently \"npm run backend\" \"npm run frontend\""
+    "heroku-postbuild": "npm run build --prefix frontend",
+    "install": "npm --prefix backend install backend && npm --prefix frontend install frontend",
+    "dev:backend": "npm install --prefix backend start",
+    "dev:frontend": "npm install --prefix frontend start",
+    "start": "npm start --prefix backend"
   },
   "repository": {
     "type": "git",
