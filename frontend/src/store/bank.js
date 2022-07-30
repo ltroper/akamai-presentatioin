@@ -9,7 +9,6 @@ const getBank = bank => {
 }
 
 export const getBankThunk = bank => async dispatch => {
-
     let datas = {bank: bank}
     const res = await fetch("/api/banks", {
         method: "POST",
@@ -17,7 +16,6 @@ export const getBankThunk = bank => async dispatch => {
         'Accept': 'application/json',
         "Content-Type": "application/json" },
         body: JSON.stringify(datas),
-        // body: "this is the body"
     });
 
     const data = await res.json();
