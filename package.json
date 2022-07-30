@@ -1,22 +1,33 @@
 {
-  "name": "akamai-presentatioin",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "cd backend && nodemon app.js",
-    "start": "cd backend && npm install && node app.js",
-    "frontend": "npm start --prefix frontend",
+    "start": "per-env",
+    "start:development": "nodemon -r dotenv/config ./bin/www",
+    "start:production": "node ./bin/www",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ltroper/akamai-presentatioin.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ltroper/akamai-presentatioin/issues"
+  "dependencies": {
+    "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^3.2.9",
+    "per-env": "^1.0.2",
+    "request": "^2.88.2"
   },
-  "homepage": "https://github.com/ltroper/akamai-presentatioin#readme"
+  "devDependencies": {
+    "dotenv-cli": "^6.0.0",
+    "nodemon": "^2.0.19"
+  }
 }
