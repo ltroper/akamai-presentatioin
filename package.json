@@ -1,0 +1,22 @@
+{
+  "name": "akamai-presentatioin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "backend": "npm start --prefix backend",
+    "frontend": "npm start --prefix frontend",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "concurrently \"npm run start\" \"npm run frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ltroper/akamai-presentatioin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ltroper/akamai-presentatioin/issues"
+  },
+  "homepage": "https://github.com/ltroper/akamai-presentatioin#readme"
+}
