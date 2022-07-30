@@ -19,7 +19,6 @@ const FormSelect = () => {
 
     let amPm = thisBank?.substr(thisBank.length - 4);
 
-    console.log(thisBank)
 
     let entidad
 
