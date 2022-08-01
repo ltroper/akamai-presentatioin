@@ -1,6 +1,4 @@
 const express = require('express');
-const axios = require('axios')
-const cheerio = require('cheerio')
 const bodyParser = require("body-parser")
 
 const routes = require('./routes');
@@ -14,12 +12,21 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
+//app.use accepts a function and is global level middleware
+
+//Parse incoming request bodies in a middleware before handlers, available under the req.body property.
+
+//Returns middleware that only parses urlencoded bodies and
+//only looks at requests where the Content-Type header matches the type option
 app.use(
     bodyParser.urlencoded({
         extended: false,
     })
 );
 
+
+//Returns middleware that only parses json and only
+//looks at requests where the Content-Type header matches the type option.
 app.use(bodyParser.json());
 
 app.use(routes);

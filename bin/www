@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+//Having this structure allows
+//you to have different startup configurations,
+//without cramming everything into app. js
 
 const { port } = require('../config');
 

@@ -13,20 +13,30 @@ const url = "https://gee.bccr.fi.cr/IndicadoresEconomicos/Cuadros/frmConsultaTCV
 
 
 router.post("/", (async (req, res) => {
+    //req.body is the user's input
     const data = req.body
     let banksArr = []
+
+    //fetch request was blocked by CORS policy.
+    //axios worked but I couldn't find out why.
 
     axios(url).then(response => {
         const html = response.data
         const $ = cheerio.load(html)
 
         const banks = $('#DG > tbody > tr')
+        //banks is an array of
         let tipoBanco
         banks.each((index, element) => {
             const tds = $(element).find("td");
 
-            // if($(tds[0]).text().trim() !== "")
+
+            //.text() gets the text from the td
+            //.trim() removes whitespace and \n
             let col1 = $(tds[0]).text().trim();
+
+            //get type of bank for all banks - data is only included for the first of every type
+            //useEffect gets all banks on first render to assing types to all banks
             if (col1.length > 0) tipoBanco = col1
             else col1 = tipoBanco
             const col2 = $(tds[1]).text().trim();
